@@ -193,3 +193,29 @@ Contributions are welcome. Please open issues for bugs and feature requests. For
 This project is inspired by cutting-edge work in decentralized inference networks and trust primitives for agentic AI.
 
 ---
+
+## Getting Started (run locally)
+
+Follow the order below. Backend must be running before using the frontend demo.
+
+1. Backend (Node + TypeScript + Express)
+
+```bash
+cd backend
+npm install
+cp .env.example .env
+# edit .env as needed
+npm run dev
+```
+
+2. Frontend (Next.js + TypeScript + Tailwind)
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open http://localhost:3000 and click "Login" to call the `/infer-escrow` demo endpoint.
+
+---
