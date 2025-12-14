@@ -271,11 +271,3 @@ Contributions are welcome. Please open issues for bugs and feature requests. For
 This project is inspired by cutting-edge work in decentralized inference networks and trust primitives for agentic AI.
 
 ---
-
-If you'd like, I can next:
-
-- Scaffold the starter code (Express + TS + sample `/infer-escrow` endpoint), or
-- Implement the validator scoring pipeline (agreement + rubric + deterministic), or
-- Produce demo scripts showing RELEASE and REJECT flows.
-
-Which would you like me to do next?
