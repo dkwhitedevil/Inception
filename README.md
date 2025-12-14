@@ -54,26 +54,7 @@ Escrow Decision Engine
 Outcome: RELEASE | REJECT | ESCALATE
 ```
 
-Mermaid flow (for docs):
-
-```mermaid
-flowchart TD
-    A[Client / Agent] --> B[/infer-escrow]
-    B --> C[Escrow Engine]
-    C --> D[Cortensor Session]
-    D --> E[Redundant Inference]
-    E --> F[Validators]
-    F --> G{Decision Engine}
-    G -->|High Confidence| H[RELEASE]
-    G -->|Low Confidence| I[REJECT]
-    G -->|Medium| J[ESCALATE]
-    H --> K[Evidence Bundle]
-    I --> K
-    J --> K
-    K --> L[Response]
-```
-
----
+--- 
 
 ## 🔐 Escrow Decision States
 
@@ -180,65 +161,6 @@ inference-escrow/
 
 ---
 
-## ✅ Hackathon Checklist (follow exactly)
-
-- Setup
-  - Create GitHub repo
-  - Initialize Node + TypeScript
-  - Add Express
-  - Add `.env.example`
-
-- Cortensor
-  - Router v1 reachable
-  - Session creation works
-  - Single and multiple inference work
-
-- Escrow Logic
-  - Escrow engine orchestrates flow
-  - Decision logic implemented
-  - Confidence score computed
-
-- Validators
-  - Agreement check
-  - Rubric scoring
-  - Deterministic rules
-
-- Evidence
-  - JSON evidence bundle
-  - Proof references included
-
-- API
-  - `POST /infer-escrow`
-  - `GET /escrow/:id`
-
-- Docs & Demo
-  - README & diagrams
-  - Live endpoint showcase for RELEASE & REJECT
-
----
-
-## ⚙️ Tech Choices (final & justified)
-
-- **TypeScript** — strong typing for trust logic
-- **Node.js (>=18)** — stable fetch and async support
-- **Express.js** — fast to assemble an MVP
-- **Cortensor Router v1 (REST)** — PoI proofs and networked inference
-- **SQLite via `better-sqlite3`** — simple persistent store for hackathon
-- **@xenova/transformers** — local semantic similarity for validators
-
----
-
-## 💡 Demo Plan
-
-Day 1 goal (MVP):
-
-- Initialize repo
-- Start Express server
-- `POST /infer-escrow` returns a dummy decision (RELEASE/REJECT/ESCALATE)
-
-From there, incrementally implement Cortensor integration, validators, scoring, and evidence bundles.
-
----
 
 ## 🏆 Hackathon #3 — Short summary
 
