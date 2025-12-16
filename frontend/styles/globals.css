@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
   @tailwind base;
   @tailwind components;
   @tailwind utilities;
@@ -194,4 +195,179 @@
   .uiverse-button .arrowContainer svg path,
   .u-button .arrowContainer svg path {
     fill: currentColor;
+  }
+
+  /* ===== New site-wide UI helpers ===== */
+  :root {
+    --btn-bg: #000;
+    --btn-foreground: #fff;
+    --card-bg: #fff;
+    --accent: #000;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1rem 1.6rem;
+    background: var(--btn-bg);
+    color: var(--btn-foreground);
+    border: 3px solid var(--accent);
+    border-radius: 10px;
+    font-weight: 800;
+    box-shadow: 8px 8px 0 0 var(--accent);
+    transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 14px 14px 0 0 var(--accent);
+  }
+
+  .btn-primary:active {
+    transform: translateY(-2px) scale(0.99);
+  }
+
+  .btn-primary:focus-visible {
+    outline: 3px solid rgba(0,0,0,0.12);
+    outline-offset: 4px;
+    border-color: var(--accent);
+  }
+
+  .card-ui {
+    background: var(--card-bg);
+    border: 2px solid var(--accent);
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: 6px 6px 0 0 var(--accent);
+    transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms ease, background 260ms;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-ui::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.02), rgba(0,0,0,0.00));
+    pointer-events: none;
+    transform: translateY(6%);
+    transition: transform 260ms;
+  }
+
+  .card-ui:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 12px 12px 0 0 var(--accent);
+  }
+
+  .card-ui:hover::before {
+    transform: translateY(-6%);
+  }
+
+  .card-ui:focus-visible {
+    outline: 3px solid rgba(0,0,0,0.06);
+    outline-offset: 6px;
+  }
+
+  /* subtle icon block */
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 8px;
+    background: #fafafa;
+    border: 1px solid rgba(0,0,0,0.06);
+    margin-right: 12px;
+  }
+
+  /* Vertical side headings (large rotated labels on wide screens) */
+  .side-heading {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 900;
+    letter-spacing: 0.22em;
+    color: rgba(0,0,0,0.12);
+    font-size: 14px;
+    z-index: 60;
+    cursor: pointer;
+    transition: color 220ms cubic-bezier(.2,.9,.2,1), transform 220ms;
+    user-select: none;
+    display: inline-block;
+    -webkit-text-stroke: 0.5px rgba(0,0,0,0.06);
+  }
+
+  .side-heading::after {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 44px;
+    background: rgba(0,0,0,0.06);
+    margin: 10px auto 0;
+    transition: background 220ms;
+  }
+
+  .side-heading.side-left {
+    left: 8px;
+    transform: rotate(-90deg) translateY(-50%);
+  }
+
+  .side-heading.side-right {
+    right: 8px;
+    transform: rotate(90deg) translateY(-50%);
+  }
+
+  .side-heading:hover {
+    color: rgba(0,0,0,0.9);
+    transform: translateY(-50%) scale(1.06);
+  }
+LOCK
+VALIDATE
+DECIDE
+RELEASE
+REJECT
+ESCALATE
+
+  /* Right-side stacked state headings */
+  .side-states-right {
+    position: fixed;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 62;
+  }
+
+  .side-states-right .side-state {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    color: rgba(0,0,0,0.12);
+    font-size: 12px;
+    cursor: pointer;
+    transition: color 220ms cubic-bezier(.2,.9,.2,1), transform 220ms;
+    -webkit-text-stroke: 0.4px rgba(0,0,0,0.04);
+  }
+
+  .side-states-right .side-state:hover {
+    color: rgba(0,0,0,0.9);
+    transform: rotate(180deg) scale(1.06);
+  }
+
+  /* Hide on small screens */
+  @media (max-width: 1024px) {
+    .side-heading { display: none; }
+    .side-states-right { display: none; }
+  }
+
+  /* Respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .btn-primary, .card-ui, .uiverse-button, .glitch, .u-button, .side-heading {
+      transition: none !important;
+      animation: none !important;
+    }
   }

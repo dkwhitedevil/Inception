@@ -1,53 +1,60 @@
 "use client";
 
-import { cn } from "./../../lib/utils";
 import { motion } from "motion/react";
+import { cn } from "@/lib/utils";
 
 type ComicTextProps = {
   children: string;
   className?: string;
-  style?: JSX.IntrinsicElements["div"]["style"];
   fontSize?: number;
+  style?: JSX.IntrinsicElements["div"]["style"];
 };
 
 export function ComicText({
   children,
   className,
+  fontSize = 4,
   style,
-  fontSize = 5,
 }: ComicTextProps) {
   if (typeof children !== "string") {
-    throw new Error("children must be a string");
+    throw new Error("ComicText children must be a string");
   }
 
-  const dotColor = "#ffbf00ff";
-  const backgroundColor = "#ffbf00ff";
+  const dotColor = "#ffdd00ff";
+  const backgroundColor = "#ffdd00ff";
 
   return (
     <motion.div
-      className={cn("select-none text-center", className)}
+      className={cn("select-none text-left", className)}
       style={{
         fontSize: `${fontSize}rem`,
-        fontFamily: "'Bangers', 'Comic Sans MS', 'Impact', sans-serif",
-        fontWeight: "900",
-        WebkitTextStroke: `${fontSize * 0.35}px #000000`,
-        transform: "skewX(-10deg)",
-        textTransform: "uppercase", 
-        filter: `
-          drop-shadow(5px 5px 0px #000000)
-          drop-shadow(3px 3px 0px )
-        `,
+        fontFamily: "'Bangers', 'Impact', 'Arial Black', sans-serif",
+        fontWeight: 1200,
+        letterSpacing: "0.04em",
+        textTransform: "uppercase",
+
+        WebkitTextStroke: `${fontSize * 0.55}px #000`,
+        color: "transparent",
+
         backgroundColor,
-        backgroundImage: `radial-gradient(circle at 1px 1px,  1px, transparent 0)`,
+        backgroundImage: `radial-gradient(circle at 1px 1px, ${dotColor} 1px, transparent 0)`,
         backgroundSize: "8px 8px",
         backgroundClip: "text",
         WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
+
+        filter: `
+          drop-shadow(5px 5px 0px #ffffffff)
+          drop-shadow(2px 2px 0px #ffffffff)
+        `,
+        transform: "skewX(-10deg)",
         ...style,
       }}
-      initial={{ opacity: 0, scale: 0.8, rotate: -2 }}
-      animate={{ opacity: 1, scale: 1, rotate: 0 }}
-      transition={{ duration: 0.6, type: "spring" }}
+      initial={{ opacity: 0, scale: 0.85, y: 10 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{
+        duration: 0.5,
+        ease: [0.175, 0.885, 0.32, 1.275],
+      }}
     >
       {children}
     </motion.div>

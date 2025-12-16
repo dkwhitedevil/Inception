@@ -1,45 +1,41 @@
-import { useState } from 'react'
+"use client"
+
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 export default function GoogleSignIn() {
-  const [loading, setLoading] = useState(false)
-  const [result, setResult] = useState<string | null>(null)
+  const { data: session, status } = useSession()
+  const loading = status === 'loading'
 
-  const handleSignIn = async () => {
-    if (loading) return
-    setLoading(true)
-    setResult(null)
+  if (status === 'loading') {
+    return <div className="text-white">Loading…</div>
+  }
 
-    try {
-      const prompt = 'User submitted prompt: safe example'
-      const res = await fetch('http://localhost:4000/infer-escrow', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt }),
-      })
-      const data = await res.json()
-      setResult(JSON.stringify(data, null, 2))
-    } catch (err: any) {
-      setResult(String(err?.message || err))
-    } finally {
-      setLoading(false)
-    }
+  if (session) {
+    return (
+      <div className="rounded bg-black/60 p-6 shadow-lg backdrop-blur-sm border border-white/5 text-white flex flex-col items-center gap-3">
+        <p className="text-sm">Signed in as <strong>{session.user?.email}</strong></p>
+        <button
+          onClick={() => signOut()}
+          className="px-4 py-2 rounded bg-red-600 hover:bg-red-700"
+        >
+          Sign out
+        </button>
+      </div>
+    )
   }
 
   return (
     <div className="rounded bg-black/60 p-8 shadow-lg backdrop-blur-sm border border-white/5 text-white flex flex-col items-center gap-4">
-
-      {/* Custom animated button */}
       <button
-        onClick={handleSignIn}
-        disabled={loading}
-        className={`uiverse-button ${loading ? 'disabled' : ''}`}
+        onClick={() => signIn('google', { callbackUrl: '/home' })}
+        className="uiverse-button"
       >
         <div className="bgContainer">
-          <span>{loading ? 'Signing in…' : 'Sign in with Google'}</span>
-          <span>{loading ? 'Signing in…' : 'Sign in with Google'}</span>
+          <span>Sign in with Google</span>
+          <span>Sign in with Google</span>
         </div>
 
-        <div className="arrowContainer">
+        <div className="arrowContainer" aria-hidden>
           <svg
             width="25"
             height="25"
@@ -54,12 +50,6 @@ export default function GoogleSignIn() {
           </svg>
         </div>
       </button>
-
-      {result && (
-        <pre className="mt-2 text-sm bg-white/5 text-white p-3 rounded w-full max-w-md overflow-x-auto">
-          {result}
-        </pre>
-      )}
     </div>
   )
 }

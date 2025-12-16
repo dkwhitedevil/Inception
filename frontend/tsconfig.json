@@ -17,7 +17,11 @@
     "jsx": "preserve",
     "incremental": true,
     "noEmit": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": [
     "next-env.d.ts",
