@@ -134,7 +134,8 @@ export default function BackgroundVideo({
       onError={(e) => onError?.(e)}
       onEnded={onEnded}
       className={className ?? 'fixed inset-0 w-full h-full object-cover z-0'}
-      style={debug ? { outline: '3px solid lime' } : undefined}
+      // Promote to compositor layer to minimize micro-stutters when the main thread is busy
+      style={{ ...(debug ? { outline: '3px solid lime' } : {}), willChange: 'transform' }}
     >
       <source src={src} type="video/mp4" />
     </video>
