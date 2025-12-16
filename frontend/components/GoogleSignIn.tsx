@@ -25,7 +25,7 @@ export default function GoogleSignIn() {
   }
 
   return (
-    <div className="rounded bg-black/60 p-8 shadow-lg backdrop-blur-sm border border-white/5 text-white flex flex-col items-center gap-4">
+    <div className="rounded bg-black/60 p-8 shadow-lg backdrop-blur-sm  text-white flex flex-col items-center gap-4">
       <button
         onClick={() => signIn('google', { callbackUrl: '/home' })}
         className="uiverse-button"
