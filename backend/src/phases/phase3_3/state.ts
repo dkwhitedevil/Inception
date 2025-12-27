@@ -5,9 +5,11 @@ export type AgreementState =
   | "AGREED"
   | "ESCALATED";
 
+export type FinalAgreementState = "AGREED" | "ESCALATED" | "CONFLICT_DETECTED";
+
 export function deriveState(
   decision: "BLOCK" | "ESCALATE" | "RELEASE"
-): AgreementState {
+): FinalAgreementState {
   switch (decision) {
     case "RELEASE":
       return "AGREED";
